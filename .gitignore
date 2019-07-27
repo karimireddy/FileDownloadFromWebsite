@@ -12,6 +12,7 @@ bin/**
 tmp/**
 tmp/**/*
 songs/**
+pdfs/**
 *.tmp
 *.bak
 *.swp

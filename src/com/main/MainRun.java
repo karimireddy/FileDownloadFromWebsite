@@ -15,6 +15,27 @@ public class MainRun {
 	public static List<String> pdfUrlsD = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException {
+
+		downloadPdfs();
+
+	}
+	
+	public static void downloadPdfs() throws IOException{
+		Arrays.asList(ReadFile.readNormal("pdfUrls").split("\n")).parallelStream().forEach(temp ->  {
+			if(!temp.isEmpty()) {
+				String path = "pdfs/"+temp.replace("http://media1.srichaganti.net/books/", "").replace("%20", "").replace("/", "_");
+				System.out.println("Downloading......: "+path);
+				try {
+					DownloadMp3.download(temp, path);
+				} catch (IOException e) {
+					System.out.println("Exception while downloading song: "+temp);
+				}
+				System.out.println("Downloaded: "+path);
+			}
+		});
+	}
+	
+	public static void downloadMp3() throws IOException{
 		
 		Arrays.asList(ReadFile.readNormal("finalList").split("\n")).parallelStream().forEach(temp ->  {
 			if(!temp.isEmpty()) {
@@ -28,7 +49,7 @@ public class MainRun {
 				System.out.println("Downloaded: "+path);
 			}
 		});
-
+		
 	}
 
 	public static void finalList() throws IOException {
