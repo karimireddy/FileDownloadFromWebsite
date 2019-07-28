@@ -16,7 +16,8 @@ public class MainRun {
 
 	public static void main(String[] args) throws IOException {
 
-		downloadPdfs();
+//		downloadPdfs();
+		downloadMp3();
 
 	}
 	
@@ -36,10 +37,11 @@ public class MainRun {
 	}
 	
 	public static void downloadMp3() throws IOException{
-		
+		String completed = ReadFile.readNormal("completed");
 		Arrays.asList(ReadFile.readNormal("finalList").split("\n")).parallelStream().forEach(temp ->  {
 			if(!temp.isEmpty()) {
 				String path = "songs/"+temp.replace("http://media.srichaganti.net/audio/", "").replace("%20", "").replace("/", "_");
+				if(!completed.contains(path)) {
 				System.out.println("Downloading......: "+path);
 				try {
 					DownloadMp3.download(temp, path);
@@ -47,6 +49,7 @@ public class MainRun {
 					System.out.println("Exception while downloading song: "+temp);
 				}
 				System.out.println("Downloaded: "+path);
+				}
 			}
 		});
 		
