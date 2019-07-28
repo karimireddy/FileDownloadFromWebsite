@@ -45,6 +45,7 @@ public class MainRun {
 				System.out.println("Downloading......: "+path);
 				try {
 					DownloadMp3.download(temp, path);
+					WriteFile.append(path, "completed");
 				} catch (IOException e) {
 					System.out.println("Exception while downloading song: "+temp);
 				}
